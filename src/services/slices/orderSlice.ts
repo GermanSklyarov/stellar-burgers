@@ -4,11 +4,13 @@ import { TOrder } from '@utils-types';
 
 type TOrderState = {
   isOrderRequest: boolean;
+  error: string;
   order: TOrder | null;
 };
 
 const initialState: TOrderState = {
   isOrderRequest: false,
+  error: '',
   order: null
 };
 
@@ -28,13 +30,15 @@ const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(postOrder.pending, (state) => {
       state.isOrderRequest = true;
+      state.error = '';
     });
     builder.addCase(postOrder.fulfilled, (state, action) => {
       state.order = action.payload.order;
       state.isOrderRequest = false;
     });
-    builder.addCase(postOrder.rejected, (state) => {
+    builder.addCase(postOrder.rejected, (state, action) => {
       state.isOrderRequest = false;
+      state.error = action.error.message || 'Что-то пошло не так';
     });
   },
   selectors: {

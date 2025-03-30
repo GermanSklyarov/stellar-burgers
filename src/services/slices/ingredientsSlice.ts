@@ -10,11 +10,13 @@ import { TIngredient } from '@utils-types';
 type TIngredientsState = {
   isIngredientsLoading: boolean;
   ingredients: TIngredient[];
+  error: string;
 };
 
 const initialState: TIngredientsState = {
   isIngredientsLoading: false,
-  ingredients: []
+  ingredients: [],
+  error: ''
 };
 
 export const fetchIngredients = createAsyncThunk(
@@ -29,6 +31,7 @@ const ingredientsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchIngredients.pending, (state) => {
       state.isIngredientsLoading = true;
+      state.error = '';
     });
     builder.addCase(
       fetchIngredients.fulfilled,
@@ -37,8 +40,9 @@ const ingredientsSlice = createSlice({
         state.isIngredientsLoading = false;
       }
     );
-    builder.addCase(fetchIngredients.rejected, (state) => {
+    builder.addCase(fetchIngredients.rejected, (state, action) => {
       state.isIngredientsLoading = false;
+      state.error = action.error.message || 'Что-то пошло не так';
     });
   },
   selectors: {
