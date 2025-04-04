@@ -2,17 +2,13 @@ import { getIngredientsApi } from '@api';
 import { configureStore } from '@reduxjs/toolkit';
 import { ingredientsData } from '../mocks/ingredientsData';
 import ingredientsSliceReducer, {
-  fetchIngredients
+  fetchIngredients,
+  initialState
 } from '../services/slices/ingredientsSlice';
 
 jest.mock('@api');
 
 describe('тест асинхронного экшена fetchIngredients', () => {
-  const initialState = {
-    isIngredientsLoading: false,
-    ingredients: [],
-    error: ''
-  };
   it('проверка состояния pending', async () => {
     const newState = ingredientsSliceReducer(
       initialState,

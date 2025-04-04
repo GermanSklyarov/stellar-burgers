@@ -12,7 +12,7 @@ type TFeedState = {
   };
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   isFeedsLoading: false,
   error: '',
   orders: [],

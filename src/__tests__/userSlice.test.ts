@@ -2,9 +2,10 @@ import { getOrdersApi, getUserApi } from '@api';
 import { configureStore } from '@reduxjs/toolkit';
 import { userDataResult, userOrdersData } from '../mocks/userData';
 import userSliceReducer, {
-    fetchUserData,
-    fetchUserOrders,
-    resetErrorText
+  fetchUserData,
+  fetchUserOrders,
+  initialState,
+  resetErrorText
 } from '../services/slices/userSlice';
 
 jest.mock('@api');
@@ -27,12 +28,6 @@ describe('тесты синхронных экшенов', () => {
 
 describe('тест асинхронных экшенов', () => {
   describe('тест асинхронного экшена fetchUserData', () => {
-    const initialState = {
-      isAuthChecked: false,
-      userData: null,
-      userOrders: [],
-      errorText: ''
-    };
     it('проверка состояния pending', async () => {
       const newState = userSliceReducer(
         initialState,

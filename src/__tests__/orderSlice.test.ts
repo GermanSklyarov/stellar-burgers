@@ -2,8 +2,9 @@ import { orderBurgerApi } from '@api';
 import { configureStore } from '@reduxjs/toolkit';
 import { orderDataResult } from '../mocks/orderData';
 import orderSliceReducer, {
-    postOrder,
-    resetOrder
+  initialState,
+  postOrder,
+  resetOrder
 } from '../services/slices/orderSlice';
 
 jest.mock('@api');
@@ -36,12 +37,6 @@ describe('тесты синхронных экшенов', () => {
 });
 
 describe('тест асинхронного экшена postOrder', () => {
-  const initialState = {
-    isOrderRequest: false,
-    error: '',
-    order: null
-  };
-
   const orderData = [
     '643d69a5c3f7b9001cfa093c',
     '643d69a5c3f7b9001cfa0941',

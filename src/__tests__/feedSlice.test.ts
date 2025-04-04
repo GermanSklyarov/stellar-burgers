@@ -1,20 +1,14 @@
 import { getFeedsApi } from '@api';
 import { configureStore } from '@reduxjs/toolkit';
 import { feedsData } from '../mocks/feedaData';
-import feedSliceReducer, { fetchFeeds } from '../services/slices/feedSlice';
+import feedSliceReducer, {
+  fetchFeeds,
+  initialState
+} from '../services/slices/feedSlice';
 
 jest.mock('@api');
 
 describe('тест асинхронного экшена fetchFeeds', () => {
-  const initialState = {
-    isFeedsLoading: false,
-    error: '',
-    orders: [],
-    feed: {
-      total: 0,
-      totalToday: 0
-    }
-  };
   it('проверка состояния pending', async () => {
     const newState = feedSliceReducer(
       initialState,

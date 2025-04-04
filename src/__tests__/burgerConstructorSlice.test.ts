@@ -5,22 +5,16 @@ import {
 } from '../mocks/burgerConstructorData';
 import burgerConstructorSliceReducer, {
   addIngredient,
+  initialState,
   moveIngredientDown,
   moveIngredientUp,
   removeIngredient
 } from '../services/slices/burgerConstructorSlice';
 
 describe('тесты синхронных экшенов', () => {
-  const initialBurgerConstructorState = {
-    constructorItems: {
-      bun: null,
-      ingredients: []
-    }
-  };
-
   test('добавить ингредиент', () => {
     const newState = burgerConstructorSliceReducer(
-      initialBurgerConstructorState,
+      initialState,
       addIngredient(firstIngredient)
     );
     const { constructorItems } = newState;
@@ -33,7 +27,7 @@ describe('тесты синхронных экшенов', () => {
 
   test('добавить булку', () => {
     const newState = burgerConstructorSliceReducer(
-      initialBurgerConstructorState,
+      initialState,
       addIngredient(bun)
     );
     const { constructorItems } = newState;

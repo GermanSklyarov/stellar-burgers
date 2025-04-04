@@ -1,38 +1,27 @@
 import { rootReducer } from '../services/store';
+import { initialState as initialBurgerConstructorState } from '../services/slices/burgerConstructorSlice';
+import { initialState as initialFeedState } from '../services/slices/feedSlice';
+import { initialState as initialIngredientsState } from '../services/slices/ingredientsSlice';
+import { initialState as initialOrderState } from '../services/slices/orderSlice';
+import { initialState as initialUserState } from '../services/slices/userSlice';
 
 describe('rootReducer', () => {
   it('should return the initial state when passed an undefined state and an unknown action', () => {
     const initialState = {
       burgerConstructor: {
-        constructorItems: {
-          bun: null,
-          ingredients: []
-        }
+        ...initialBurgerConstructorState
       },
       feed: {
-        isFeedsLoading: false,
-        error: '',
-        orders: [],
-        feed: {
-          total: 0,
-          totalToday: 0
-        }
+        ...initialFeedState
       },
       ingredients: {
-        isIngredientsLoading: false,
-        ingredients: [],
-        error: ''
+        ...initialIngredientsState
       },
       order: {
-        isOrderRequest: false,
-        error: '',
-        order: null
+        ...initialOrderState
       },
       user: {
-        isAuthChecked: false,
-        userData: null,
-        userOrders: [],
-        errorText: ''
+        ...initialUserState
       }
     };
 

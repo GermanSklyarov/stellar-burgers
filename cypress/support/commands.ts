@@ -35,3 +35,18 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('addIngredient', (selector: string) => {
+  cy.get(`${selector} > button`).first().click();
+});
+
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      addIngredient(selector: string): Chainable<void>;
+    }
+  }
+}
+
+export {};

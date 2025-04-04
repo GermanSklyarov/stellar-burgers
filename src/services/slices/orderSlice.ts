@@ -8,7 +8,7 @@ type TOrderState = {
   order: TOrder | null;
 };
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   isOrderRequest: false,
   error: '',
   order: null
