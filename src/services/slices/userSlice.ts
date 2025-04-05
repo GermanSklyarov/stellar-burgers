@@ -19,7 +19,7 @@ type TUserState = {
   errorText: string;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   userData: null,
   userOrders: [],

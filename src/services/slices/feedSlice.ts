@@ -4,6 +4,7 @@ import { TOrder } from '@utils-types';
 
 type TFeedState = {
   isFeedsLoading: boolean;
+  error: string;
   orders: TOrder[];
   feed: {
     total: number;
@@ -11,8 +12,9 @@ type TFeedState = {
   };
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   isFeedsLoading: false,
+  error: '',
   orders: [],
   feed: {
     total: 0,
@@ -29,6 +31,7 @@ const feedSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchFeeds.pending, (state) => {
       state.isFeedsLoading = true;
+      state.error = '';
     });
     builder.addCase(fetchFeeds.fulfilled, (state, action) => {
       state.isFeedsLoading = false;
@@ -38,8 +41,9 @@ const feedSlice = createSlice({
         totalToday: action.payload.totalToday
       };
     });
-    builder.addCase(fetchFeeds.rejected, (state) => {
+    builder.addCase(fetchFeeds.rejected, (state, action) => {
       state.isFeedsLoading = false;
+      state.error = action.error.message || 'Что-то пошло не так';
     });
   },
   selectors: {
